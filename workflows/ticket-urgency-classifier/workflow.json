@@ -1,0 +1,228 @@
+{
+  "name": "Ticket Urgency Classifier",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Ticket Urgency Classifier\n\nClassifica tickets de suporte por prioridade, urgência e impacto.\n\nCaso inspirado no template `ticket_urgency_classification.json` do repositório `wassupjay/n8n-free-templates`, redesenhado para um fluxo menor e mais reutilizável.",
+        "height": 320,
+        "width": 920,
+        "color": 3
+      },
+      "id": "9157be97-8d7b-4878-a314-df361ee64f76",
+      "name": "Contexto",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ticket-urgency-classifier",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "a72dc8c6-1aa3-4028-adb4-537111c18d8c",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        20
+      ],
+      "webhookId": "epm-ticket-urgency-classifier"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "08fcd2f7-fd78-4338-b23e-a2706dfa1ea2",
+              "name": "ticket_id",
+              "value": "={{ $json.body.ticket_id || $json.ticket_id || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "e4bbf8d5-ac5b-4b4c-8ad2-1468db7df262",
+              "name": "customer_name",
+              "value": "={{ $json.body.customer_name || $json.customer_name || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "1cfe2de2-90db-4557-ae49-bb2fd8fda996",
+              "name": "source",
+              "value": "={{ $json.body.source || $json.source || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "f2f5c319-c6c1-4f85-9a67-eb2c77468885",
+              "name": "subject",
+              "value": "={{ $json.body.subject || $json.subject || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "ffba4312-ee89-48a8-a214-1c81def82174",
+              "name": "description",
+              "value": "={{ $json.body.description || $json.description || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "2a2a9a21-f3ad-487b-a876-8a6d989966a7",
+              "name": "current_plan",
+              "value": "={{ $json.body.current_plan || $json.current_plan || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "c295457c-1c5e-40dc-a0a1-8c327cb47de4",
+              "name": "reported_users_affected",
+              "value": "={{ $json.body.reported_users_affected || $json.reported_users_affected || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0f00e038-fcce-43bd-b240-0898309a6d0c",
+      "name": "Normalize Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Classifique o ticket abaixo para triagem inicial de suporte.\n\nTicket: {{ $json.ticket_id }}\nCliente: {{ $json.customer_name }}\nOrigem: {{ $json.source }}\nPlano atual: {{ $json.current_plan }}\nUsuários afetados: {{ $json.reported_users_affected }}\nAssunto: {{ $json.subject }}\nDescrição: {{ $json.description }}\n\nRegras:\n- Responda em português do Brasil.\n- Classifique prioridade como P1, P2, P3 ou P4.\n- Classifique urgência como baixa, média ou alta.\n- Classifique impacto como baixo, médio ou alto.\n- Classifique sentimento como positivo, neutro ou negativo.\n- Descreva o problema principal em linguagem executiva curta.\n- Sugira o encaminhamento operacional mais adequado.\n- Adicione notas curtas de triagem.\n- Não invente fatos não presentes no ticket.",
+        "hasOutputParser": true
+      },
+      "id": "827d95bb-c2f5-455e-af1c-f8d1af3961d5",
+      "name": "Basic LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "aa5f2e09-0314-4ff8-af4a-1c7a5a53169b",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "OPENAI_API",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"priority\": \"P1\",\n  \"urgency\": \"alta\",\n  \"impact\": \"alto\",\n  \"sentiment\": \"negativo\",\n  \"main_issue\": \"Falha crítica no checkout com impacto comercial.\",\n  \"recommended_routing\": \"Encaminhar para time responsável imediatamente.\",\n  \"triage_notes\": \"Notas curtas para a fila operacional.\"\n}"
+      },
+      "id": "d4ecdd55-9588-48c4-9f2a-36062cd61338",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $json.output || $json;\nreturn [{\n  json: {\n    workflow: 'ticket-urgency-classifier',\n    generated_at: new Date().toISOString(),\n    result\n  }\n}];"
+      },
+      "id": "712cb2da-0e58-4335-bded-0bd9fcb9b36d",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        20
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {},
+  "versionId": "6910a56d-8472-4d86-abaa-d71b587925b3",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "id": "epm-ticket-urgency-classifier",
+  "tags": []
+}

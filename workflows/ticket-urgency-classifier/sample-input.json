@@ -1,0 +1,9 @@
+{
+  "ticket_id": "SUP-2048",
+  "customer_name": "Loja Aurora",
+  "source": "portal de suporte",
+  "subject": "Checkout fora do ar",
+  "description": "Desde o início da tarde nenhum cliente consegue finalizar compras no nosso site. O botão de pagamento trava e a página não conclui o pedido. Já recebemos reclamações e estamos perdendo vendas neste momento.",
+  "current_plan": "Business",
+  "reported_users_affected": "Todos os clientes tentando comprar"
+}

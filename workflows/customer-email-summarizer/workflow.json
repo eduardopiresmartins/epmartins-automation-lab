@@ -1,0 +1,216 @@
+{
+  "name": "Customer Email Summarizer",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Customer Email Summarizer\n\nResume mensagens de clientes e devolve contexto acionável para atendimento.\n\nCaso inspirado no template `summarize_customer_emails.json` do repositório `wassupjay/n8n-free-templates`, simplificado para uso como case de portfólio.",
+        "height": 320,
+        "width": 920,
+        "color": 4
+      },
+      "id": "86527871-f943-46c0-94e8-813d6097c57b",
+      "name": "Contexto",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "customer-email-summarizer",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "ccbf2992-7d81-4394-a440-5597fd02135f",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        20
+      ],
+      "webhookId": "epm-customer-email-summarizer"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7398ab8b-076f-4a80-b995-d28dd868d948",
+              "name": "customer_name",
+              "value": "={{ $json.body.customer_name || $json.customer_name || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "1c89157b-7923-4ba6-9517-7f31a3e438a7",
+              "name": "customer_email",
+              "value": "={{ $json.body.customer_email || $json.customer_email || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "0d8bd8e4-972f-4ec1-b8c2-cf192f2d9586",
+              "name": "subject",
+              "value": "={{ $json.body.subject || $json.subject || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "2edff30f-6148-40de-9b43-d0230d2969c9",
+              "name": "message",
+              "value": "={{ $json.body.message || $json.message || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "cf8fe0c4-c2f5-460a-b30b-2f8d6a67a3b1",
+              "name": "channel",
+              "value": "={{ $json.body.channel || $json.channel || 'email' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "893af039-2f48-4f42-851c-5c94ccba90d8",
+      "name": "Normalize Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analise a mensagem de cliente abaixo e produza uma saída operacional para atendimento.\n\nNome do cliente: {{ $json.customer_name }}\nE-mail: {{ $json.customer_email }}\nCanal: {{ $json.channel }}\nAssunto: {{ $json.subject }}\nMensagem: {{ $json.message }}\n\nRegras:\n- Escreva em português do Brasil.\n- Resuma de forma objetiva.\n- Identifique o assunto principal com linguagem de negócio.\n- Classifique sentimento como positivo, neutro ou negativo.\n- Classifique urgência como baixa, média ou alta.\n- Sugira a próxima ação operacional.\n- Crie uma sugestão curta de resposta ao cliente.\n- Não invente dados fora do texto recebido.",
+        "hasOutputParser": true
+      },
+      "id": "0f4adf18-aea0-4492-ad84-344dce56d07e",
+      "name": "Basic LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "06ef4f35-8c33-45fc-9938-a9205c5fdb8b",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "OPENAI_API",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"main_topic\": \"Atraso na entrega de pedido\",\n  \"summary\": \"Resumo curto do caso.\",\n  \"sentiment\": \"negativo\",\n  \"urgency\": \"alta\",\n  \"suggested_action\": \"Ação operacional recomendada.\",\n  \"draft_reply\": \"Sugestão breve de resposta ao cliente.\"\n}"
+      },
+      "id": "d25db53f-fecf-4f0a-b965-9eb0bbd3378a",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $json.output || $json;\nreturn [{\n  json: {\n    workflow: 'customer-email-summarizer',\n    generated_at: new Date().toISOString(),\n    result\n  }\n}];"
+      },
+      "id": "496f0673-2d22-4899-b97a-4c9b3888b1d9",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        20
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {},
+  "versionId": "f04f853c-2151-4a42-820a-d61790e15ff5",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "id": "epm-customer-email-summarizer",
+  "tags": []
+}

@@ -1,0 +1,222 @@
+{
+  "name": "Product Description Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Product Description Generator\n\nGera título, descrição, benefícios, tags e categoria sugerida a partir de um payload simples de produto.\n\nCaso inspirado no template `product_description_generator.json` do repositório `wassupjay/n8n-free-templates`, com arquitetura reduzida para portfólio.",
+        "height": 320,
+        "width": 920,
+        "color": 5
+      },
+      "id": "2d18a44b-8197-4b2f-b39d-762fd7f5cb31",
+      "name": "Contexto",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "product-description-generator",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "56fd13fc-783e-44fd-8c75-f67813f26403",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        20
+      ],
+      "webhookId": "epm-product-description-generator"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8b42fb96-16f7-452b-a4a6-5637a0a5e1d2",
+              "name": "product_name",
+              "value": "={{ $json.body.product_name || $json.product_name || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "f79994ab-c041-4f74-8be5-6a0210f52ce6",
+              "name": "brand",
+              "value": "={{ $json.body.brand || $json.brand || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "7fd02868-c9c1-494b-a298-e0f70092890f",
+              "name": "category_hint",
+              "value": "={{ $json.body.category_hint || $json.category_hint || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "980afadf-bff3-4f90-86e4-93d92462915e",
+              "name": "target_audience",
+              "value": "={{ $json.body.target_audience || $json.target_audience || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "fb7de9b7-7a20-4c41-a9d9-1fef6b4ec28c",
+              "name": "key_features",
+              "value": "={{ JSON.stringify($json.body.key_features || $json.key_features || []) }}",
+              "type": "string"
+            },
+            {
+              "id": "c3fdc2d7-f59d-4b55-88af-97ee3c32b45f",
+              "name": "tone",
+              "value": "={{ $json.body.tone || $json.tone || 'Profissional e comercial' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ca117a0d-0a83-4e95-8f60-98eb0c9cdbfb",
+      "name": "Normalize Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Crie uma resposta para cadastro de produto em marketplace com base nestes dados:\n\nProduto: {{ $json.product_name }}\nMarca: {{ $json.brand }}\nCategoria sugerida pelo usuário: {{ $json.category_hint }}\nPúblico-alvo: {{ $json.target_audience }}\nCaracterísticas principais: {{ $json.key_features }}\nTom desejado: {{ $json.tone }}\n\nRegras:\n- Escreva em português do Brasil.\n- Seja objetivo, comercial e claro.\n- Não invente especificações técnicas não informadas.\n- O título deve ser otimizado para catálogo e busca.\n- A descrição curta deve ter até 320 caracteres.\n- Os benefícios devem destacar utilidade real.\n- As tags devem ser úteis para busca interna.\n- A categoria sugerida deve ser plausível para e-commerce.",
+        "hasOutputParser": true
+      },
+      "id": "b2af8827-99f6-4afe-8cc4-df868e7dbaf4",
+      "name": "Basic LLM Chain",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "id": "543fc6d1-414e-428b-a14c-872970026d86",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        180
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "OPENAI_API",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"title\": \"Garrafa Térmica Inox 1L com Vedação Anti-vazamento\",\n  \"short_description\": \"Descrição curta e comercial do produto.\",\n  \"benefits\": [\n    \"Benefício 1\",\n    \"Benefício 2\",\n    \"Benefício 3\"\n  ],\n  \"tags\": [\n    \"tag 1\",\n    \"tag 2\",\n    \"tag 3\"\n  ],\n  \"suggested_category\": \"Categoria > Subcategoria\"\n}"
+      },
+      "id": "086779e6-92cb-4d37-95c5-489cba66ad6d",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $json.output || $json;\nreturn [{\n  json: {\n    workflow: 'product-description-generator',\n    generated_at: new Date().toISOString(),\n    result\n  }\n}];"
+      },
+      "id": "f45f6f0d-d399-4f1d-8e68-59716767d1ba",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        20
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {},
+  "versionId": "c25332b8-a674-4a74-95d8-db4bf399abf8",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "id": "epm-product-description-generator",
+  "tags": []
+}

@@ -1,0 +1,7 @@
+{
+  "customer_name": "Mariana Costa",
+  "customer_email": "mariana.costa@example.com",
+  "subject": "Pedido atrasado e sem atualização",
+  "message": "Olá, equipe. Meu pedido estava previsto para chegar ontem, mas até agora não houve nenhuma atualização no rastreio. Eu precisava receber este item antes do fim de semana porque é um presente. Gostaria de entender o que aconteceu e se existe alguma alternativa de entrega mais rápida ou cancelamento com reembolso. Aguardo retorno o quanto antes.",
+  "channel": "email"
+}

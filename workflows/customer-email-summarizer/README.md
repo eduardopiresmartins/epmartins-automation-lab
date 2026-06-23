@@ -16,11 +16,11 @@ O workflow recebe os dados via webhook, organiza remetente, assunto e corpo da m
 
 ## Exemplo de entrada
 
-Veja [sample-input.json](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/customer-email-summarizer/sample-input.json).
+Veja [sample-input.json](sample-input.json).
 
 ## Exemplo de saída
 
-Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/customer-email-summarizer/sample-output.md).
+Veja [sample-output.md](sample-output.md).
 
 ## Como usar
 
@@ -29,6 +29,16 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 3. Ajuste prompts ou variáveis, se necessário.
 4. Execute um teste.
 5. Ative o workflow.
+
+## Como testar rapidamente
+
+```bash
+curl -X POST https://SEU_N8N/webhook/customer-email-summarizer \
+  -H "Content-Type: application/json" \
+  -d @sample-input.json
+```
+
+Substitua `https://SEU_N8N` pela URL da sua instância do n8n. Em ambiente local, use a URL gerada pelo próprio n8n para o webhook de teste ou produção.
 
 ## Credenciais necessárias
 
@@ -43,6 +53,10 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 - Criar rotas específicas por assunto.
 - Sugerir respostas com tom da marca.
 - Incluir histórico do cliente como contexto adicional.
+
+## Nota de portfólio
+
+Este workflow demonstra a capacidade de aplicar IA em triagem operacional e atendimento ao cliente. O case reforça competências em integração via webhook, normalização de dados, classificação semântica, geração de resumo e desenho de soluções que reduzem tempo operacional.
 
 ## Créditos
 

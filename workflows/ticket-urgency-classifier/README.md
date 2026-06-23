@@ -16,11 +16,11 @@ O workflow recebe os dados do ticket via webhook, normaliza os campos essenciais
 
 ## Exemplo de entrada
 
-Veja [sample-input.json](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/ticket-urgency-classifier/sample-input.json).
+Veja [sample-input.json](sample-input.json).
 
 ## Exemplo de saída
 
-Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/ticket-urgency-classifier/sample-output.md).
+Veja [sample-output.md](sample-output.md).
 
 ## Como usar
 
@@ -29,6 +29,16 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 3. Ajuste prompts ou variáveis, se necessário.
 4. Execute um teste.
 5. Ative o workflow.
+
+## Como testar rapidamente
+
+```bash
+curl -X POST https://SEU_N8N/webhook/ticket-urgency-classifier \
+  -H "Content-Type: application/json" \
+  -d @sample-input.json
+```
+
+Substitua `https://SEU_N8N` pela URL da sua instância do n8n. Em ambiente local, use a URL gerada pelo próprio n8n para o webhook de teste ou produção.
 
 ## Credenciais necessárias
 
@@ -43,6 +53,10 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 - Roteamento automático por squad ou especialidade.
 - Enriquecer o ticket com histórico do cliente.
 - Criar alçada automática para incidentes P1.
+
+## Nota de portfólio
+
+Este workflow demonstra a capacidade de transformar tickets de suporte em informação priorizada para operação, produto e tecnologia. O case reforça competências em classificação de urgência, análise de impacto, roteamento operacional e uso de IA como apoio à tomada de decisão.
 
 ## Créditos
 

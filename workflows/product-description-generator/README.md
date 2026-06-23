@@ -16,11 +16,11 @@ O workflow recebe os dados via webhook, normaliza os campos principais, envia um
 
 ## Exemplo de entrada
 
-Veja [sample-input.json](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/product-description-generator/sample-input.json).
+Veja [sample-input.json](sample-input.json).
 
 ## Exemplo de saída
 
-Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/workflows/product-description-generator/sample-output.md).
+Veja [sample-output.md](sample-output.md).
 
 ## Como usar
 
@@ -29,6 +29,16 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 3. Ajuste prompts ou variáveis, se necessário.
 4. Execute um teste.
 5. Ative o workflow.
+
+## Como testar rapidamente
+
+```bash
+curl -X POST https://SEU_N8N/webhook/product-description-generator \
+  -H "Content-Type: application/json" \
+  -d @sample-input.json
+```
+
+Substitua `https://SEU_N8N` pela URL da sua instância do n8n. Em ambiente local, use a URL gerada pelo próprio n8n para o webhook de teste ou produção.
 
 ## Credenciais necessárias
 
@@ -43,6 +53,10 @@ Veja [sample-output.md](/Users/eduardopiresmartins/Documents/epmartins-automatio
 - Adicionar tradução automática para catálogos multilíngues.
 - Validar limite de caracteres por canal de venda.
 - Enviar a saída para Google Sheets, ERP ou CMS.
+
+## Nota de portfólio
+
+Este workflow demonstra a capacidade de transformar uma dor de e-commerce em uma automação prática usando n8n, IA e saída estruturada. O case reforça competências em modelagem de entrada, engenharia de prompt, padronização de resposta e pensamento de produto aplicado a marketplaces.
 
 ## Créditos
 

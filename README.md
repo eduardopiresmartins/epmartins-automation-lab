@@ -14,9 +14,34 @@ Este projeto existe para demonstrar automação aplicada com foco em produto, in
 
 | Workflow | Problema de negócio | Saída principal | Tecnologias | Status |
 | --- | --- | --- | --- | --- |
-| Product Description Generator | Criar descrições melhores para produtos de marketplace com mais rapidez. | Título otimizado, descrição comercial, benefícios, tags e sugestão de categoria. | n8n, modelo de IA, Webhook, JSON | MVP |
-| Customer Email Summarizer | Reduzir o tempo gasto lendo e triando mensagens de clientes. | Resumo, assunto principal, sentimento, urgência e ação sugerida. | n8n, modelo de IA, e-mail/webhook, JSON | MVP |
-| Ticket Urgency Classifier | Priorizar tickets de suporte com base em urgência e impacto no negócio. | Prioridade, urgência, impacto, sentimento e sugestão de encaminhamento. | n8n, modelo de IA, Webhook, JSON | MVP |
+| [Product Description Generator](workflows/product-description-generator) | Criar descrições melhores para produtos de marketplace com mais rapidez. | Título otimizado, descrição comercial, benefícios, tags e sugestão de categoria. | n8n, modelo de IA, Webhook, JSON | MVP |
+| [Customer Email Summarizer](workflows/customer-email-summarizer) | Reduzir o tempo gasto lendo e triando mensagens de clientes. | Resumo, assunto principal, sentimento, urgência e ação sugerida. | n8n, modelo de IA, e-mail/webhook, JSON | MVP |
+| [Ticket Urgency Classifier](workflows/ticket-urgency-classifier) | Priorizar tickets de suporte com base em urgência e impacto no negócio. | Prioridade, urgência, impacto, sentimento e sugestão de encaminhamento. | n8n, modelo de IA, Webhook, JSON | MVP |
+
+## Demonstração rápida
+
+Cada workflow deste laboratório foi estruturado para funcionar como um case prático de portfólio, não apenas como um arquivo JSON isolado.
+
+Cada automação possui:
+
+- Payload de exemplo para teste
+- Saída esperada documentada
+- Workflow JSON importável no n8n
+- Explicação do problema de negócio
+- Ideias de evolução para cenários reais
+
+Isso permite avaliar rapidamente o raciocínio por trás da automação, a estrutura técnica do fluxo e o valor de negócio que ela busca resolver.
+
+## Previews visuais
+
+Os workflows foram pensados para receber previews visuais dentro da pasta `assets/`.
+
+Em próximas versões, esta seção poderá incluir:
+
+- Capturas dos fluxos no n8n
+- Diagramas simples de arquitetura
+- Exemplos visuais de entrada e saída
+- Prints de integrações com ferramentas externas
 
 ## Estrutura do repositório
 
@@ -52,19 +77,19 @@ epmartins-automation-lab/
 
 ## Como importar os workflows
 
-O passo a passo está em [docs/how-to-import.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/docs/how-to-import.md).
+O passo a passo está em [docs/how-to-import.md](docs/how-to-import.md).
 
 ## Credenciais necessárias
 
-As credenciais e placeholders esperados estão em [docs/credentials.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/docs/credentials.md).
+As credenciais e placeholders esperados estão em [docs/credentials.md](docs/credentials.md).
 
 ## Arquitetura
 
-A visão geral da arquitetura dos fluxos está em [docs/architecture.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/docs/architecture.md).
+A visão geral da arquitetura dos fluxos está em [docs/architecture.md](docs/architecture.md).
 
 ## Roadmap
 
-Os próximos passos planejados estão em [docs/roadmap.md](/Users/eduardopiresmartins/Documents/epmartins-automation-lab/docs/roadmap.md).
+Os próximos passos planejados estão em [docs/roadmap.md](docs/roadmap.md).
 
 ## Créditos
 

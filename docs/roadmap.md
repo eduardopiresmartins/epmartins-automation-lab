@@ -1,8 +1,8 @@
 # Roadmap
 
-Este roadmap organiza as próximas evoluções do EPMartins Automation Lab em fases, priorizando primeiro qualidade de portfólio, depois integrações reais e, por fim, evolução do laboratório como produto.
+Este roadmap organiza as próximas evoluções do EPMartins Automation Lab em fases, priorizando primeiro qualidade do repositório, depois integrações reais e, por fim, evolução do laboratório como produto.
 
-## Fase 1 — Qualidade de portfólio
+## Fase 1 — Qualidade do repositório
 
 - [x] Corrigir links internos e navegação entre documentos.
 - [ ] Validar importação dos 3 workflows no n8n.

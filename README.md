@@ -10,11 +10,11 @@ Laboratório de automações com IA e n8n para resolver problemas reais de negó
 
 ## Visão geral
 
-Este repositório reúne workflows práticos de automação com IA, n8n e integrações orientados a cenários reais de operação, atendimento e e-commerce. A proposta é mostrar como combinar entrada estruturada, modelos de linguagem, regras de negócio e saídas acionáveis em fluxos simples de entender, testar e evoluir.
+Este repositório reúne workflows práticos de automação com IA, n8n e integrações orientados a cenários reais de operação, atendimento e e-commerce. A proposta é demonstrar como combinar entrada estruturada, modelos de linguagem, regras de negócio e saídas acionáveis em fluxos claros, testáveis e fáceis de evoluir.
 
 ## Por que este projeto existe
 
-Este projeto existe para demonstrar automação aplicada com foco em produto, integração entre APIs, uso pragmático de IA e documentação clara. Mais do que publicar arquivos JSON de n8n, a ideia é apresentar casos de uso com contexto de negócio, exemplos de entrada e saída e material suficiente para que outra pessoa entenda o valor da automação.
+Este projeto existe para demonstrar automação aplicada com foco em produto, integração entre APIs, uso pragmático de IA e documentação clara. Mais do que publicar arquivos JSON de n8n, a ideia é apresentar casos de uso completos, com contexto de negócio, exemplos de entrada e saída, estrutura previsível e material suficiente para avaliação técnica.
 
 ## Workflows disponíveis
 
@@ -26,7 +26,7 @@ Este projeto existe para demonstrar automação aplicada com foco em produto, in
 
 ## Demonstração rápida
 
-Cada workflow deste laboratório foi estruturado para funcionar como um case prático de portfólio, não apenas como um arquivo JSON isolado.
+Cada workflow deste laboratório foi estruturado como um case técnico completo, não apenas como um arquivo JSON isolado.
 
 Cada automação possui:
 
@@ -36,7 +36,7 @@ Cada automação possui:
 - Explicação do problema de negócio
 - Ideias de evolução para cenários reais
 
-Isso permite avaliar rapidamente o raciocínio por trás da automação, a estrutura técnica do fluxo e o valor de negócio que ela busca resolver.
+Isso permite avaliar rapidamente o raciocínio por trás da automação, a estrutura técnica do fluxo e o problema de negócio que ela procura resolver.
 
 ## Previews visuais
 
@@ -49,7 +49,7 @@ Status atual:
 - [ ] Exemplos visuais de entrada e saída
 - [ ] Prints de integrações com ferramentas externas
 
-Esses materiais serão adicionados após a validação real dos workflows no n8n.
+A pasta `assets/` está reservada para complementar a leitura técnica com material visual do projeto.
 
 ## Estrutura do repositório
 
@@ -104,16 +104,16 @@ Os próximos passos planejados estão em [docs/roadmap.md](docs/roadmap.md).
 
 ## Checklist de validação
 
-Antes de divulgar ou evoluir os workflows, acompanhe o checklist em [docs/validation-checklist.md](docs/validation-checklist.md).
+O checklist técnico de revisão e validação está em [docs/validation-checklist.md](docs/validation-checklist.md).
 
 ## Créditos
 
-Este projeto foi inspirado em templates abertos de automação da comunidade n8n, incluindo o repositório `wassupjay/n8n-free-templates`. Os workflows foram adaptados, curados e documentados como cases de portfólio orientados a problemas reais de negócio.
+Este projeto foi inspirado em templates abertos de automação da comunidade n8n, incluindo o repositório `wassupjay/n8n-free-templates`. Os workflows foram adaptados, curados e documentados como casos de uso orientados a problemas reais de negócio.
 
 ## Sobre mim
 
 Criado por Eduardo Pires Martins — Desenvolvedor de Software com foco em backend, APIs, integrações, produtos digitais e tecnologia orientada a negócios.
 
 Portfólio: https://www.epmartins.com.br  
-LinkedIn: https://www.linkedin.com/in/eduardo-pires-martins/  
+LinkedIn: https://www.linkedin.com/in/eduardopiresmartins/  
 GitHub: https://github.com/eduardopiresmartins

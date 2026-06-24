@@ -1,5 +1,11 @@
 # EPMartins Automation Lab
 
+![Status](https://img.shields.io/badge/status-MVP-8620E0)
+![n8n](https://img.shields.io/badge/n8n-automation-2B6CD6)
+![AI](https://img.shields.io/badge/IA-powered-F79D23)
+![Docs](https://img.shields.io/badge/docs-PT--BR-success)
+![Portfolio](https://img.shields.io/badge/portfolio-project-0A0A0A)
+
 Laboratório de automações com IA e n8n para resolver problemas reais de negócio.
 
 ## Visão geral
@@ -34,14 +40,16 @@ Isso permite avaliar rapidamente o raciocínio por trás da automação, a estru
 
 ## Previews visuais
 
-Os workflows foram pensados para receber previews visuais dentro da pasta `assets/`.
+Os workflows foram pensados para receber previews visuais dentro da pasta [`assets/`](assets/).
 
-Em próximas versões, esta seção poderá incluir:
+Status atual:
 
-- Capturas dos fluxos no n8n
-- Diagramas simples de arquitetura
-- Exemplos visuais de entrada e saída
-- Prints de integrações com ferramentas externas
+- [ ] Capturas dos fluxos no n8n
+- [ ] Diagramas simples de arquitetura
+- [ ] Exemplos visuais de entrada e saída
+- [ ] Prints de integrações com ferramentas externas
+
+Esses materiais serão adicionados após a validação real dos workflows no n8n.
 
 ## Estrutura do repositório
 
@@ -71,6 +79,7 @@ epmartins-automation-lab/
     credentials.md
     architecture.md
     roadmap.md
+    validation-checklist.md
   assets/
     .gitkeep
 ```
@@ -83,6 +92,8 @@ O passo a passo está em [docs/how-to-import.md](docs/how-to-import.md).
 
 As credenciais e placeholders esperados estão em [docs/credentials.md](docs/credentials.md).
 
+> Nenhuma credencial real, token ou chave de API está versionada neste repositório. Os workflows usam placeholders e devem ser configurados diretamente no ambiente seguro do n8n.
+
 ## Arquitetura
 
 A visão geral da arquitetura dos fluxos está em [docs/architecture.md](docs/architecture.md).
@@ -90,6 +101,17 @@ A visão geral da arquitetura dos fluxos está em [docs/architecture.md](docs/ar
 ## Roadmap
 
 Os próximos passos planejados estão em [docs/roadmap.md](docs/roadmap.md).
+
+## Checklist de validação
+
+Antes de divulgar ou evoluir os workflows, acompanhe o checklist em [docs/validation-checklist.md](docs/validation-checklist.md).
+
+## Próximos passos imediatos
+
+- [ ] Fixar este repositório no perfil do GitHub
+- [ ] Adicionar 1 a 3 prints reais dos workflows no n8n
+- [ ] Validar a importação real dos workflows no n8n
+- [ ] Publicar um post no LinkedIn apresentando o projeto
 
 ## Créditos
 

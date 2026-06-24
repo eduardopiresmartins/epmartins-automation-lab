@@ -44,12 +44,32 @@ Os workflows foram pensados para receber previews visuais dentro da pasta [`asse
 
 Status atual:
 
-- [ ] Capturas dos fluxos no n8n
+- [x] Capturas dos fluxos no n8n
 - [ ] Diagramas simples de arquitetura
 - [ ] Exemplos visuais de entrada e saída
 - [ ] Prints de integrações com ferramentas externas
 
 A pasta `assets/` está reservada para complementar a leitura técnica com material visual do projeto.
+
+Preview disponível no momento:
+
+### 1. Product Description Generator
+
+Geração estruturada de título, descrição, benefícios, tags e categoria sugerida para produtos de marketplace.
+
+![Preview do workflow Product Description Generator](assets/product-description-generator-workflow-success.png)
+
+### 2. Customer Email Summarizer
+
+Resumo operacional de mensagens de clientes com identificação de assunto, urgência, sentimento e ação sugerida.
+
+![Preview do workflow Customer Email Summarizer](assets/customer-email-summarizer-workflow-success.png)
+
+### 3. Ticket Urgency Classifier
+
+Classificação de tickets por prioridade, urgência e impacto para apoiar a triagem inicial de suporte.
+
+![Preview do workflow Ticket Urgency Classifier](assets/ticket-urgency-classifier-workflow-success.png)
 
 ## Estrutura do repositório
 

@@ -14,6 +14,12 @@ Entrada -> Processamento com IA -> Saída estruturada -> Próxima ação
 
 O workflow recebe os dados via webhook, normaliza os campos principais, envia um prompt com contexto de e-commerce para o modelo e devolve uma resposta JSON pronta para integração com catálogo, ERP ou planilha operacional.
 
+## Preview do workflow
+
+![Preview do Product Description Generator](../../assets/product-description-generator-workflow-success.png)
+
+Visão do fluxo completo de geração estruturada para cadastro de produtos em marketplaces, com entrada normalizada, processamento com IA e saída pronta para uso.
+
 ## Exemplo de entrada
 
 Veja [sample-input.json](sample-input.json).

@@ -14,6 +14,12 @@ Entrada -> Processamento com IA -> Saída estruturada -> Próxima ação
 
 O workflow recebe os dados via webhook, organiza remetente, assunto e corpo da mensagem, usa IA para produzir um resumo operacional e entrega a saída em JSON para uso em CRM, help desk ou fila interna.
 
+## Preview do workflow
+
+![Preview do Customer Email Summarizer](../../assets/customer-email-summarizer-workflow-success.png)
+
+Visão do fluxo de triagem e resumo de mensagens de clientes, com normalização dos dados de entrada, análise semântica e resposta estruturada para atendimento.
+
 ## Exemplo de entrada
 
 Veja [sample-input.json](sample-input.json).

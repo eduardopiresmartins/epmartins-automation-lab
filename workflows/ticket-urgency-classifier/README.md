@@ -14,6 +14,12 @@ Entrada -> Processamento com IA -> Saída estruturada -> Próxima ação
 
 O workflow recebe os dados do ticket via webhook, normaliza os campos essenciais, usa IA para classificar o caso e devolve um JSON que pode alimentar ferramentas de suporte, operação ou produto.
 
+## Preview do workflow
+
+![Preview do Ticket Urgency Classifier](../../assets/ticket-urgency-classifier-workflow-success.png)
+
+Visão do fluxo de classificação operacional de tickets, com análise de urgência, impacto e prioridade para apoiar a triagem inicial de suporte.
+
 ## Exemplo de entrada
 
 Veja [sample-input.json](sample-input.json).

@@ -106,13 +106,6 @@ Os próximos passos planejados estão em [docs/roadmap.md](docs/roadmap.md).
 
 Antes de divulgar ou evoluir os workflows, acompanhe o checklist em [docs/validation-checklist.md](docs/validation-checklist.md).
 
-## Próximos passos imediatos
-
-- [ ] Fixar este repositório no perfil do GitHub
-- [ ] Adicionar 1 a 3 prints reais dos workflows no n8n
-- [ ] Validar a importação real dos workflows no n8n
-- [ ] Publicar um post no LinkedIn apresentando o projeto
-
 ## Créditos
 
 Este projeto foi inspirado em templates abertos de automação da comunidade n8n, incluindo o repositório `wassupjay/n8n-free-templates`. Os workflows foram adaptados, curados e documentados como cases de portfólio orientados a problemas reais de negócio.
